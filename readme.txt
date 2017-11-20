@@ -2,7 +2,8 @@
 Contributors: dartiss
 Tags: market, coverage, w3tech, penetration, Wordpress
 Requires at least: 4.6
-Tested up to: 4.7.5
+Tested up to: 4.9
+Requires PHP: 5.3
 Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -23,9 +24,7 @@ https://www.youtube.com/watch?v=gY2k8_sSTsE
 * PHP7 compatible
 * Fully internationalized, ready for translations **If you would like to add a translation to his plugin then please head to our [Translating WordPress](https://translate.wordpress.org/projects/wp-plugins/world-domination "Translating WordPress") page**
 
-== Licence ==
-
-This WordPress plugin is licensed under the [GPLv2 (or later)](http://wordpress.org/about/gpl/ "GNU General Public License").
+Please visit the [Github page](https://github.com/dartiss/world-domination "Github") for the latest code development, planned enhancements and known issues.
 
 == Installation ==
 
