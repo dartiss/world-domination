@@ -3,7 +3,7 @@
 Plugin Name: World Domination
 Plugin URI: https://github.com/dartiss/world-domination
 Description: Add WordPress market coverage summary to your dashboard.
-Version: 2.0
+Version: 2.0.1
 Author: David Artiss
 Author URI: https://artiss.blog
 Text Domain: world-domination
@@ -162,13 +162,13 @@ function wd_market_share_data( $shortcode = false ) {
 
 	// Output to the dashboard or return percent
 
-	if ( $shortcode == 'total' ) {
+	if ( $shortcode === 'total' ) {
 
 		return $total;
 
 	} else {
 
-		if ( $shortcode == 'crm' ) {
+		if ( $shortcode === 'crm' ) {
 
 			return $crm;	
 
@@ -179,11 +179,11 @@ function wd_market_share_data( $shortcode = false ) {
 
 			if ( !$total ) {
 
-				echo ' style="color: #f00;"><a alt="' . __( 'Link to the source website', 'world-domination' ) . '" href="' . esc_url( $source ) . '">' . __( 'Error fetching the WordPress market data.', 'world-domination' ) . '</a> ' . __( 'Please try again later.' , 'world-domination' ) . '/p>';
+				echo ' style="color: #f00;"><a alt="' . esc_attr( __( 'Link to the source website', 'world-domination' ) ) . '" href="' . esc_url( $source ) . '">' . esc_html( __( 'Error fetching the WordPress market data.', 'world-domination' ) ) . '</a> ' . esc_html( __( 'Please try again later.' , 'world-domination' ) ) . '/p>';
 
 			} else {
 
-				echo '><a alt="' . __( 'Link to the source website', 'world-domination' ) . '" title="' . __( 'Last checked on ', 'world-domination' ) . esc_attr( date( get_option('date_format') . ' ' . get_option('time_format'), $cache[ 'updated' ] ) ) . '" href="' . esc_url( $source ) . '">' . sprintf( __( 'WordPress is currently used</a> by %s of all websites and represents %s of all CRM usage.' , 'world-domination' ), esc_attr( $total ) . '%', esc_attr( $crm ) . '%' ) . '</p>';
+				echo '><a alt="' . esc_attr( __( 'Link to the source website', 'world-domination' ) ) . '" title="' . esc_attr( __( 'Last checked on ', 'world-domination' ) ) . esc_attr( date( get_option('date_format') . ' ' . get_option('time_format'), $cache[ 'updated' ] ) ) . '" href="' . esc_url( $source ) . '">' . sprintf( esc_html( __( 'WordPress is currently used%s by %s of all websites and represents %s of all CRM usage.' , 'world-domination' ) ), '</a>', esc_attr( $total ) . '%', esc_attr( $crm ) . '%' ) . '</p>';
 			}
 
 			return;
@@ -206,6 +206,8 @@ add_filter( 'activity_box_end', 'wd_market_share_data', 10, 1 );
 */
 
 function scrape_wd_data( $source ) {
+
+	$data = array();
 
 	// Fetch the website data
 
@@ -274,7 +276,15 @@ function scrape_wd_data( $source ) {
 
 function get_wd_page_data( $source ) {
 
-	$response = wp_remote_get( $source, array( 'timeout' => 5 ) );
+	if ( function_exists( 'vip_safe_wp_remote_get' ) ) {
+
+		$response = vip_safe_wp_remote_get( $source, '', 3, 3 ); 
+
+	} else {
+
+		$response = wp_remote_get( $source, array( 'timeout' => 3 ) ); // @codingStandardsIgnoreLine -- for non-VIP environments
+
+	}
 
 	if ( is_array( $response ) ) {
 
