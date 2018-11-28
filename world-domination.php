@@ -179,7 +179,7 @@ function wd_market_share_data( $shortcode = false ) {
 
 			if ( !$total ) {
 
-				echo ' style="color: #f00;"><a alt="' . esc_attr( __( 'Link to the source website', 'world-domination' ) ) . '" href="' . esc_url( $source ) . '">' . esc_html( __( 'Error fetching the WordPress market data.', 'world-domination' ) ) . '</a> ' . esc_html( __( 'Please try again later.' , 'world-domination' ) ) . '/p>';
+				echo ' style="color: #f00;"><a alt="' . esc_attr( __( 'Link to the source website', 'world-domination' ) ) . '" href="' . esc_url( $source ) . '">' . esc_html( __( 'Error fetching the WordPress market data.', 'world-domination' ) ) . '</a> ' . esc_html( __( 'Please try again later.' , 'world-domination' ) ) . '</p>';
 
 			} else {
 
