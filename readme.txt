@@ -2,7 +2,7 @@
 Contributors: dartiss
 Tags: market, coverage, share, w3tech, penetration, crm, wordpress
 Requires at least: 4.6
-Tested up to: 4.9.3
+Tested up to: 5.2.2
 Requires PHP: 5.3
 Stable tag: 2.0.1
 License: GPLv2 or later
@@ -27,6 +27,8 @@ https://www.youtube.com/watch?v=gY2k8_sSTsE
 * Gutenberg ready
 
 Please visit the [Github page](https://github.com/dartiss/world-domination "Github") for the latest code development, planned enhancements and known issues.
+
+Icons made by [Freepik](https://www.flaticon.com/authors/freepik "Freepik") from [www.flaticon.co](https://www.flaticon.com/ "Flaticon") is licensed by [CC 3.0 BY](http://creativecommons.org/licenses/by/3.0 "Creative Commons BY 3.0").
 
 == Using the shortcodes =
 
