@@ -28,8 +28,6 @@ https://www.youtube.com/watch?v=gY2k8_sSTsE
 
 Please visit the [Github page](https://github.com/dartiss/world-domination "Github") for the latest code development, planned enhancements and known issues.
 
-Icons made by [Freepik](https://www.flaticon.com/authors/freepik "Freepik") from [www.flaticon.co](https://www.flaticon.com/ "Flaticon") is licensed by [CC 3.0 BY](http://creativecommons.org/licenses/by/3.0 "Creative Commons BY 3.0").
-
 == Using the shortcodes =
 
 There are two shortcodes `[wp_total_market]` and `[wp_crm_market]`. Simply add these, wherever you wish within a post or page, to display the latest total or CRM market share data. 
