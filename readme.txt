@@ -2,7 +2,7 @@
 Contributors: dartiss
 Tags: market, coverage, share, w3tech, penetration, crm, wordpress
 Requires at least: 4.6
-Tested up to: 5.2.2
+Tested up to: 5.3
 Requires PHP: 5.3
 Stable tag: 2.0.1
 License: GPLv2 or later
