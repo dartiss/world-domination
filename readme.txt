@@ -1,30 +1,25 @@
 === World Domination ===
 Contributors: dartiss
+Donate link: https://artiss.blog/donate
 Tags: market, coverage, share, w3tech, penetration, crm, wordpress
 Requires at least: 4.6
-Tested up to: 5.3
+Tested up to: 5.4
 Requires PHP: 5.3
-Stable tag: 2.0.1
+Stable tag: 2.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Add WordPress market coverage summary to your dashboard.
+🌎 Add WordPress market coverage summary to your dashboard.
 
 == Description ==
 
-This plugin adds a summary of the current WordPress market coverage to your dashboard!
+🌎 Adds a summary of the current WordPress market coverage to your dashboard!
 
 Basically screen scraping from the [W3Techs](https://w3techs.com/technologies/details/cm-wordpress/all/all "W3Techs") website (don’t panic W3Techs, I’m caching the data - your website performance is safe!), this will display what percentage of websites (in total or that use CRM) are currently powered by WordPress. There are even shortcodes so that you can this information into your posts as well!
 
 Now you can keep an eye on how close to world (aka internet) domination WordPress is achieving <cue diabolical laughter>.
 
 https://www.youtube.com/watch?v=gY2k8_sSTsE
-
-* Designed for both single and multi-site installations
-* PHP7 compatible
-* Passes [WordPress.com VIP](https://vip.wordpress.com) coding standards and fully compatible with their platform
-* Fully internationalized, ready for translations **If you would like to add a translation to his plugin then please head to our [Translating WordPress](https://translate.wordpress.org/projects/wp-plugins/world-domination "Translating WordPress") page**
-* Gutenberg ready
 
 Please visit the [Github page](https://github.com/dartiss/world-domination "Github") for the latest code development, planned enhancements and known issues.
 
@@ -55,6 +50,10 @@ For performance reasons I cache the dashboard information for one week so, if th
 
 [Learn more about my version numbering methodology](https://artiss.blog/2016/09/wordpress-plugin-versioning/ "WordPress Plugin Versioning")
 
+= 2.0.2 =
+* Enhancement: Added some shiny, new plugin meta
+* Maintenance: You know how it followed WordPress.com coding standards before? Now it's the WordPress VIP coding standards! 
+
 = 2.0.1 =
 * Enhancement: Code quality enhancements to bring it in line with WordPress.com VIP coding standards
 * Enhancement: Now uses `wp_remote_get` alternative when run on the WordPress.com VIP platform
@@ -75,5 +74,5 @@ For performance reasons I cache the dashboard information for one week so, if th
 
 == Upgrade Notice ==
 
-= 2.0.1 =
-* Now fully compatible with the WordPress.com VIP platform
+= 2.0.2 =
+* Improved code standards and added some new plugin meta
