@@ -1,19 +1,18 @@
 <?php
 /**
-* Uninstaller
-*
-* Uninstall the plugin by removing any options from the database
-*
-* @package	world-domination
-* @since	1.0
-*/
+ * Uninstaller
+ *
+ * Uninstall the plugin by removing any options from the database
+ *
+ * @package world-domination
+ */
 
-// If the uninstall was not called by WordPress, exit
+// If the uninstall was not called by WordPress, exit.
 
-if ( !defined( 'WP_UNINSTALL_PLUGIN' ) ) {
+if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit();
 }
 
-// Remove options
+// Remove options.
 
-delete_option( 'world_domination');
+delete_option( 'world_domination' );
