@@ -1,9 +1,9 @@
 === World Domination ===
 Contributors: dartiss
 Donate link: https://artiss.blog/donate
-Tags: market, coverage, share, w3tech, penetration, crm, wordpress
+Tags: market, coverage, share, w3tech, crm
 Requires at least: 4.6
-Tested up to: 5.4
+Tested up to: 5.6
 Requires PHP: 5.3
 Stable tag: 2.0.2
 License: GPLv2 or later
@@ -21,7 +21,9 @@ Now you can keep an eye on how close to world (aka internet) domination WordPres
 
 https://www.youtube.com/watch?v=gY2k8_sSTsE
 
-Please visit the [Github page](https://github.com/dartiss/world-domination "Github") for the latest code development, planned enhancements and known issues.
+Iconography is courtesy of the very talented [Janki Rathod](https://www.fiverr.com/jankirathore) ♥️
+
+👉 Please visit the [Github page](https://github.com/dartiss/world-domination "Github") for the latest code development, planned enhancements and known issues 👈
 
 == Using the shortcodes =
 
@@ -48,7 +50,7 @@ For performance reasons I cache the dashboard information for one week so, if th
 
 == Changelog ==
 
-[Learn more about my version numbering methodology](https://artiss.blog/2016/09/wordpress-plugin-versioning/ "WordPress Plugin Versioning")
+I use semantic versioning, with the first release being 1.0.
 
 = 2.0.2 =
 * Enhancement: Added some shiny, new plugin meta
