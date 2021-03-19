@@ -1,11 +1,11 @@
 === World Domination ===
 Contributors: dartiss
 Donate link: https://artiss.blog/donate
-Tags: market, coverage, share, w3tech, crm
+Tags: market, coverage, share, w3tech, cms
 Requires at least: 4.6
 Tested up to: 5.7
 Requires PHP: 5.3
-Stable tag: 2.0.2
+Stable tag: 2.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -15,7 +15,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 🌎 Adds a summary of the current WordPress market coverage to your dashboard!
 
-Basically screen scraping from the [W3Techs](https://w3techs.com/technologies/details/cm-wordpress/all/all "W3Techs") website (don’t panic W3Techs, I’m caching the data - your website performance is safe!), this will display what percentage of websites (in total or that use CRM) are currently powered by WordPress. There are even shortcodes so that you can this information into your posts as well!
+Basically screen scraping from the [W3Techs](https://w3techs.com/technologies/details/cm-wordpress/all/all "W3Techs") website (don’t panic W3Techs, I’m caching the data - your website performance is safe!), this will display what percentage of websites (in total or that use CMS) are currently powered by WordPress. There are even shortcodes so that you can this information into your posts as well!
 
 Now you can keep an eye on how close to world (aka internet) domination WordPress is achieving <cue diabolical laughter>.
 
@@ -27,7 +27,7 @@ Iconography is courtesy of the very talented [Janki Rathod](https://www.fiverr.c
 
 == Using the shortcodes =
 
-There are two shortcodes `[wp_total_market]` and `[wp_crm_market]`. Simply add these, wherever you wish within a post or page, to display the latest total or CRM market share data. 
+There are two shortcodes `[wp_total_market]` and `[wp_cms_market]`. Simply add these, wherever you wish within a post or page, to display the latest total or CMS market share data. 
 
 == Installation ==
 
@@ -52,6 +52,9 @@ For performance reasons I cache the dashboard information for one week so, if th
 
 I use semantic versioning, with the first release being 1.0.
 
+= 2.0.3 =
+* Bug: Why, in the name of all things holy, did nobody not say that I was incorrectly referring to WordPress being a CRM and not CMS? I'm not angry, just disappointed. It's now fixed, though.
+
 = 2.0.2 =
 * Enhancement: Added some shiny, new plugin meta
 * Maintenance: You know how it followed WordPress.com coding standards before? Now it's the WordPress VIP coding standards! 
@@ -63,7 +66,7 @@ I use semantic versioning, with the first release being 1.0.
 = 2.0 =
 * Enhancement: Total re-write of the caching to ensure that if the data is not available previous information will be re-used (less chance of an error message as a result but, on the down side, may see older data as a result)
 * Enhancement: Sides shored up with lots of security additions - escape them all!
-* Enhancement: Now I show the CRM percentage on the dashboard and not just the overall one
+* Enhancement: Now I show the CMS percentage on the dashboard and not just the overall one
 * Enhancement: Brand new shortcodes so that you can embed this information in a post if that's your bag. Baby.
 * Enhancement: Using a time constant for the caching rather than hard-coding long strings of numbers that I'm only likely to type wrong
 * Enhancement: The Github links are on me! Now added to all the files and all the meta
@@ -77,4 +80,4 @@ I use semantic versioning, with the first release being 1.0.
 == Upgrade Notice ==
 
 = 2.0.2 =
-* Improved code standards and added some new plugin meta
+* I've stopped saying that WordPress is a CRM. Because it's not.
