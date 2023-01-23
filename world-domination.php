@@ -9,7 +9,7 @@
  * Plugin Name:       World Domination
  * Plugin URI:        https://wordpress.org/plugins/world-domination/
  * Description:       Add WordPress market coverage summary to your dashboard.
- * Version:           2.0.3
+ * Version:           2.0.4
  * Requires at least: 4.6
  * Requires PHP:      5.3
  * Author:            David Artiss
@@ -37,7 +37,7 @@
  */
 function world_domination_plugin_meta( $links, $file ) {
 
-	if ( false !== strpos( $file, 'plugin_skeleton.php' ) ) {
+	if ( false !== strpos( $file, 'world-domination.php' ) ) {
 
 		$links = array_merge(
 			$links,
@@ -64,12 +64,12 @@ add_filter( 'plugin_row_meta', 'world_domination_plugin_meta', 10, 2 );
  */
 function world_domination_total_shortcode( $paras = '', $content = '' ) {
 
-	$output = wd_market_share_data( 'total' );
+	$data = wd_market_share_data();
 
-	if ( ! $output ) {
+	if ( ! $data ) {
 		return __( 'N/A', 'world-domination' );
 	} else {
-		return esc_attr( $output ) . '%';
+		return esc_attr( $data['total'] ) . '%';
 	}
 
 }
@@ -87,12 +87,12 @@ add_shortcode( 'wp_total_market', 'world_domination_total_shortcode' );
  */
 function world_domination_cms_shortcode( $paras = '', $content = '' ) {
 
-	$output = wd_market_share_data( 'cms' );
+	$data = wd_market_share_data();
 
-	if ( ! $output ) {
+	if ( ! $data ) {
 		return __( 'N/A', 'world-domination' );
 	} else {
-		return esc_attr( $output ) . '%';
+		return esc_attr( $data['cms'] ) . '%';
 	}
 
 }
@@ -101,23 +101,55 @@ add_shortcode( 'wp_crm_market', 'world_domination_cms_shortcode' ); // Retained 
 add_shortcode( 'wp_cms_market', 'world_domination_cms_shortcode' );
 
 /**
- * Add World Domination Data to Dashboard
+ * Add market data to Dashboard
+ *
+ * Grab market share data and then output to dashboard.
+ */
+function wd_add_to_dashboard() {
+
+	$data = wd_market_share_data();
+
+	$total   = $data['total'];
+	$cms     = $data['cms'];
+	$source  = $data['source'];
+	$updated = $data['updated'];
+
+	echo '<p class="domination-right-now"';
+
+	if ( ! $total ) {
+
+		echo ' style="color: #f00;"><a alt="' . esc_attr( __( 'Link to the source website', 'world-domination' ) ) . '" href="' . esc_url( $source ) . '">' . esc_html( __( 'Error fetching the WordPress market data.', 'world-domination' ) ) . '</a> ' . esc_html( __( 'Please try again later.', 'world-domination' ) ) . '</p>';
+	} else {
+
+		/* translators: 1: end of link anchor, 2: total percentage of web use, 3: total percentage of CMSs. */
+		echo '><a alt="' . esc_attr( __( 'Link to the source website', 'world-domination' ) ) . '" title="' . esc_attr( __( 'Last checked on ', 'world-domination' ) ) . esc_attr( gmdate( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), $updated ) ) . '" href="' . esc_url( $source ) . '">' . sprintf( esc_html( __( 'WordPress is currently used%1$s by %2$s of all websites and represents %3$s of all CMS usage.', 'world-domination' ) ), '</a>', esc_attr( $total ) . '%', esc_attr( $cms ) . '%' ) . '</p>';
+	}
+
+	return true;
+}
+
+add_filter( 'activity_box_end', 'wd_add_to_dashboard', 10, 1 );
+
+/**
+ * Grab market share data
  *
  * Screen scrape W3Techs site to get the current usage of WordPress.
- *
- * @param  string $shortcode Name of shortcode in use. Or false.
  */
-function wd_market_share_data( $shortcode = false ) {
+function wd_market_share_data() {
+
+	$source = '';
 
 	// Attempt to fetch data from options.
 	$cache = get_option( 'world_domination' );
 
 	// Check if data was returned and, if so, had is expired?
-	if ( ( ! $cache ) || ( is_array( $cache ) && esc_attr( $cache['timeout'] ) < date( 'U' ) ) ) {
+	if ( ( ! $cache ) || ( is_array( $cache ) && esc_attr( $cache['timeout'] ) < gmdate( 'U' ) ) ) {
 
 		$source = esc_url( 'https://w3techs.com/technologies/details/cm-wordpress/all/all' );
 
-		$cache_days = 1;
+		// Number of days that cache lasts for, as well as days that data can be considered fresh.
+		$cache_days  = 1;
+		$data_expiry = 7;
 
 		// If cache was missing or it's expired, fetch fresh data.
 		$data  = scrape_wd_data( $source );
@@ -132,57 +164,29 @@ function wd_market_share_data( $shortcode = false ) {
 			if ( is_array( $cache ) ) {
 				$total = esc_attr( $cache['percent'] );
 				$cms   = esc_attr( $cache['cms'] );
+				// Check if the retrieved update date > 7 days. If so, stop using it and error.
+				if ( $cache['updated'] < gmdate( 'U' ) - ( DAY_IN_SECONDS * $data_expiry ) ) {
+					$cache['total'] = false;
+					$cache['cms']   = false;
+				}
 			} else {
-				$total = false;
-				$cms   = false;
+				$cache['total'] = false;
+				$cache['cms']   = false;
 			}
-
-			// If new data was fetched, save it with a new expiry.
-
 		} else {
 
+			// If new data was fetched, save it with a new expiry.
 			$cache['total']   = esc_attr( $total );
 			$cache['cms']     = esc_attr( $cms );
-			$cache['timeout'] = esc_attr( date( 'U' ) + ( DAY_IN_SECONDS * $cache_days ) );
-			$cache['updated'] = esc_attr( date( 'U' ) );
+			$cache['timeout'] = esc_attr( gmdate( 'U' ) + ( DAY_IN_SECONDS * $cache_days ) );
+			$cache['updated'] = esc_attr( gmdate( 'U' ) );
 			update_option( 'world_domination', $cache );
 
 		}
-	} else {
-
-		// Saved data was found and it hadn't expired. Hurrah!
-		$total = esc_attr( $cache['total'] );
-		$cms   = esc_attr( $cache['cms'] );
-
 	}
 
-	// Output to the dashboard or return percent.
-	if ( 'total' === $shortcode ) {
-		return $total;
-
-	} else {
-
-		if ( 'cms' === $shortcode ) {
-			return $cms;
-
-		} else {
-			echo '<p class="domination-right-now"';
-
-			if ( ! $total ) {
-
-				echo ' style="color: #f00;"><a alt="' . esc_attr( __( 'Link to the source website', 'world-domination' ) ) . '" href="' . esc_url( $source ) . '">' . esc_html( __( 'Error fetching the WordPress market data.', 'world-domination' ) ) . '</a> ' . esc_html( __( 'Please try again later.', 'world-domination' ) ) . '</p>';
-			} else {
-				/* translators: 1: end of link anchor, 2: total percentage of web use, 3: total percentage of CMSs. */
-				echo '><a alt="' . esc_attr( __( 'Link to the source website', 'world-domination' ) ) . '" title="' . esc_attr( __( 'Last checked on ', 'world-domination' ) ) . esc_attr( date( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), $cache['updated'] ) ) . '" href="' . esc_url( $source ) . '">' . sprintf( esc_html( __( 'WordPress is currently used%1$s by %2$s of all websites and represents %3$s of all CMS usage.', 'world-domination' ) ), '</a>', esc_attr( $total ) . '%', esc_attr( $cms ) . '%' ) . '</p>';
-			}
-			
-			return false;
-		}
-	}
-
+	return $cache;
 }
-
-add_filter( 'activity_box_end', 'wd_market_share_data', 10, 1 );
 
 /**
  * Scrape World Domination Data
@@ -197,7 +201,7 @@ function scrape_wd_data( $source ) {
 	$data = array();
 
 	// Fetch the website data.
-	$text = get_wd_page_data( $source );
+	$text = get_wd_file( $source );
 
 	// If data was found, attempt to extract out the market data that we need.
 	$total = false;
@@ -246,14 +250,14 @@ function scrape_wd_data( $source ) {
 }
 
 /**
- * Fetch data from web page
+ * Fetch a URL
  *
- * Fetch WordPress market data from supplied page
+ * Fetch a file based on a supplier URL. WordPress VIP friendly.
  *
  * @param  string $source  URL to extract data.
  * @return string          Returned data.
  */
-function get_wd_page_data( $source ) {
+function get_wd_file( $source ) {
 
 	if ( function_exists( 'vip_safe_wp_remote_get' ) ) {
 		$response = vip_safe_wp_remote_get( $source, '', 3, 3 ); 
