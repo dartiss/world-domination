@@ -6,6 +6,8 @@ Basically screen scraping from the [W3Techs](https://w3techs.com/technologies/de
 
 Now you can keep an eye on how close to world (aka internet) domination WordPress is achieving <cue diabolical laughter>.
 
+World Domination is a community plugin that follows both WordPress and WordPress VIP coding standards.
+
 Iconography is courtesy of the very talented [Janki Rathod](https://www.fiverr.com/jankirathore) ♥️
 
 <p align="right"><a href="https://wordpress.org/plugins/world-domination/"><img src="https://img.shields.io/wordpress/plugin/dt/world-domination?label=wp.org%20downloads&style=for-the-badge">&nbsp;<img src="https://img.shields.io/wordpress/plugin/stars/world-domination?color=orange&style=for-the-badge"></a></p>

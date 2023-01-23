@@ -5,7 +5,7 @@ Tags: market, coverage, share, w3tech, cms
 Requires at least: 4.6
 Tested up to: 6.1
 Requires PHP: 7.4
-Stable tag: 2.0.3
+Stable tag: 2.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -20,6 +20,8 @@ Basically screen scraping from the [W3Techs](https://w3techs.com/technologies/de
 Now you can keep an eye on how close to world (aka internet) domination WordPress is achieving <cue diabolical laughter>.
 
 https://www.youtube.com/watch?v=gY2k8_sSTsE
+
+World Domination is a community plugin that follows both WordPress and WordPress VIP coding standards.
 
 Iconography is courtesy of the very talented [Janki Rathod](https://www.fiverr.com/jankirathore) ♥️
 
@@ -51,6 +53,15 @@ For performance reasons I cache the dashboard information for one week so, if th
 == Changelog ==
 
 I use semantic versioning, with the first release being 1.0.
+
+= 2.0.4 =
+* Bug: Squashed a pesky bug that meant I wasn't initially defining a variable. Thanks to `emrikol` for pointing this out.
+* Bug: I added some new plugin meta in 2.0.2 and it appears it wasn't working. How did I miss that? Please don't tell me...
+* Enhancement: If the plugin fails to get the new stats rather than keep using the old one ad-infinitum (and potentially serving up wrong information), after a few days you'll get an error message.
+* Enhancement: I tried to make this plugin as robust as possible, but maybe a little too so. If new data can't be retrieved for the market rate, it keeps using the existing, cached, data. Which is great until it goes on for too long. Now, after a week of failure, you'll get an error
+* Enhancement: Improved date handling to make you feel better. After all, time is a great healer.
+* Maintenance: Detection of WooCommerce. Doesn't do much now but is for a future update. Added it now for, I dunno know, I felt like it :shrug:
+* Maintenance: Moved some code around to prepare it for some future updates. Think ahead folks!
 
 = 2.0.3 =
 * Bug: Why, in the name of all things holy, did nobody not say that I was incorrectly referring to WordPress being a CRM and not CMS? I'm not angry, just disappointed. It's now fixed, though.
