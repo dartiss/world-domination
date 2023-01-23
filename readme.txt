@@ -90,5 +90,5 @@ I use semantic versioning, with the first release being 1.0.
 
 == Upgrade Notice ==
 
-= 2.0.2 =
-* I've stopped saying that WordPress is a CRM. Because it's not.
+= 2.0.4 =
+* Assorted bug fixes and minor enhancements
