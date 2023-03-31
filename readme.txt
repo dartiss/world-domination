@@ -50,9 +50,15 @@ For performance reasons I cache the dashboard information for one week so, if th
 
 Yes you can! Head to Settings -> General in WP Admin and find the tickbox for this.
 
+= The dashboard graphic keeps changing colour! =
+
+One of the parameters to generate the image is a hash - I pass a different one into it based on the current date, so will change daily.
+
 == Screenshots ==
 
-1. How it appears on the dashboard with Akismet enabled.
+1. Example of it on the dashboard (image not enabled)
+2. Example of it on the dashboard (image enabled)
+3. Example of how the image toggle setting appears
 
 == Changelog ==
 
