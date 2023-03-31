@@ -1,11 +1,11 @@
 === World Domination ===
-Contributors: dartiss
+Contributors: dartiss, tallulahhh
 Donate link: https://artiss.blog/donate
 Tags: market, coverage, share, w3tech, cms
 Requires at least: 4.6
-Tested up to: 6.1
+Tested up to: 6.2
 Requires PHP: 7.4
-Stable tag: 2.0.4
+Stable tag: 2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -46,6 +46,10 @@ Voila! It's ready to go.
 
 For performance reasons I cache the dashboard information for one week so, if the market figure changes in the meantime, you will get this discrepancy. If you find this keeps happening, please let me know and I’ll look at refreshing the cache more regularly.
 
+= I don't like the graphic on the dashboard that shows the percentage. Can I switch it off? =
+
+Yes you can! Head to Settings -> General in WP Admin and find the tickbox for this.
+
 == Screenshots ==
 
 1. How it appears on the dashboard with Akismet enabled.
@@ -53,6 +57,9 @@ For performance reasons I cache the dashboard information for one week so, if th
 == Changelog ==
 
 I use semantic versioning, with the first release being 1.0.
+
+= 2.1 =
+* Enhancement: We're now integrating the excellent [wp-somethingty-percent](https://github.com/Automattic/wp-somethingty-percent), which uses Canvas / GD to generate a graphic representation of the WordPress market share
 
 = 2.0.4 =
 * Bug: Squashed a pesky bug that meant I wasn't initially defining a variable. Thanks to `emrikol` for pointing this out.
@@ -90,5 +97,5 @@ I use semantic versioning, with the first release being 1.0.
 
 == Upgrade Notice ==
 
-= 2.0.4 =
-* Assorted bug fixes and minor enhancements
+= 2.1 =
+* The dashboard now shows an image representation of the market share

@@ -8,10 +8,10 @@
  *
  * Plugin Name:       World Domination
  * Plugin URI:        https://wordpress.org/plugins/world-domination/
- * Description:       Add WordPress market coverage summary to your dashboard.
- * Version:           2.0.4
+ * Description:       🌎 Add WordPress market coverage summary to your dashboard.
+ * Version:           2.1
  * Requires at least: 4.6
- * Requires PHP:      5.3
+ * Requires PHP:      7.4
  * Author:            David Artiss
  * Author URI:        https://artiss.blog
  * Text Domain:       world-domination
@@ -52,6 +52,56 @@ function world_domination_plugin_meta( $links, $file ) {
 }
 
 add_filter( 'plugin_row_meta', 'world_domination_plugin_meta', 10, 2 );
+
+/**
+ * Modify actions links.
+ *
+ * Add or remove links for the actions listed against this plugin
+ *
+ * @param    string $actions      Current actions.
+ * @param    string $plugin_file  The plugin.
+ * @return   string               Actions, now with deactivation removed!
+ */
+function world_domination_action_links( $actions, $plugin_file ) {
+
+	// Make sure we only perform actions for this specific plugin!
+	if ( strpos( $plugin_file, 'world-domination.php' ) !== false ) {
+
+		// Add link to the settings page.
+		array_unshift( $actions, '<a href="' . admin_url() . 'options-general.php">' . __( 'Settings', 'world-domination' ) . '</a>' );
+
+	}
+
+	return $actions;
+}
+
+add_filter( 'plugin_action_links', 'world_domination_action_links', 10, 2 );
+
+/**
+ * Add to settings
+ *
+ * Add a field to the general settings screen for switching the image on/off
+ */
+function wd_settings_init() {
+
+	add_settings_field( 'wd_image_toggle', __( 'Enable World Domination image', 'world-domination' ), 'wd_setting_callback', 'general', 'default', array( 'label_for' => 'wd_image_toggle' ) );
+
+	register_setting( 'general', 'wd_image_toggle' );
+
+}
+
+add_action( 'admin_init', 'wd_settings_init' );
+
+/**
+ * Show image option switch
+ *
+ * Output the settings field for toggling the image on the dashboard
+ */
+function wd_setting_callback() {
+
+	echo '<label><input name="wd_image_toggle" type="checkbox" value="1" ' . checked( 1, get_option( 'wd_image_toggle', 1 ), false ) . '/>&nbsp;&nbsp;Untick to remove the image from the dashboard</label>';
+
+}
 
 /**
  * World Domination total shortcode
@@ -123,6 +173,13 @@ function wd_add_to_dashboard() {
 
 		/* translators: 1: end of link anchor, 2: total percentage of web use, 3: total percentage of CMSs. */
 		echo '><a alt="' . esc_attr( __( 'Link to the source website', 'world-domination' ) ) . '" title="' . esc_attr( __( 'Last checked on ', 'world-domination' ) ) . esc_attr( gmdate( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), $updated ) ) . '" href="' . esc_url( $source ) . '">' . sprintf( esc_html( __( 'WordPress is currently used%1$s by %2$s of all websites and represents %3$s of all CMS usage.', 'world-domination' ) ), '</a>', esc_attr( $total ) . '%', esc_attr( $cms ) . '%' ) . '</p>';
+
+		if ( 1 == get_option( 'wd_image_toggle', 1 ) ) {
+			// Create a class for converting the percent to words. Use the blog's current language setting for which to use.
+			$format = new NumberFormatter( get_bloginfo( 'language' ), NumberFormatter::SPELLOUT );
+			/* translators: s: percentage of market */
+			echo '<p><img src="' . esc_url( plugin_dir_url( __FILE__ ) ) . 'wp-somethingty-percent/wpbokeh-somethingty.php?hash=' . esc_attr( gmdate( 'Ymd' ) ) . '&hi=' . esc_attr( $format->format( $total ) ) . '&lo=' . esc_attr__( 'percent of the internet', 'world-domination' ) . '" style="width:100%"></p>';
+		}
 	}
 
 	return true;
