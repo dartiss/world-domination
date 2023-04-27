@@ -99,7 +99,7 @@ add_action( 'admin_init', 'wd_settings_init' );
  */
 function wd_setting_callback() {
 
-	echo '<label><input name="wd_image_toggle" type="checkbox" value="1" ' . checked( 1, get_option( 'wd_image_toggle', 1 ), false ) . '/>&nbsp;&nbsp;Untick to remove the image from the dashboard</label>';
+	echo '<label><input name="wd_image_toggle" type="checkbox" value="1" ' . checked( 1, get_option( 'wd_image_toggle', 1 ), false ) . '/>' . __( '&nbsp;&nbsp;Untick to remove the image from the dashboard', 'world-domination' ) . '</label>';
 
 }
 
