@@ -9,7 +9,7 @@
  * Plugin Name:       World Domination
  * Plugin URI:        https://wordpress.org/plugins/world-domination/
  * Description:       🌎 Add WordPress market coverage summary to your dashboard.
- * Version:           2.1
+ * Version:           2.1.1
  * Requires at least: 4.6
  * Requires PHP:      7.4
  * Author:            David Artiss
@@ -99,7 +99,7 @@ add_action( 'admin_init', 'wd_settings_init' );
  */
 function wd_setting_callback() {
 
-	echo '<label><input name="wd_image_toggle" type="checkbox" value="1" ' . checked( 1, get_option( 'wd_image_toggle', 1 ), false ) . '/>&nbsp;&nbsp;Untick to remove the image from the dashboard</label>';
+	echo '<label><input name="wd_image_toggle" type="checkbox" value="1" ' . checked( 1, get_option( 'wd_image_toggle', 1 ), false ) . '/>&nbsp;&nbsp;' . esc_attr( __( 'Untick to remove the image from the dashboard', 'world-domination' ) ) . '</label>';
 
 }
 
