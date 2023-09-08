@@ -9,7 +9,7 @@
  * Plugin Name:       World Domination
  * Plugin URI:        https://wordpress.org/plugins/world-domination/
  * Description:       🌎 Add WordPress market coverage summary to your dashboard.
- * Version:           2.1.1
+ * Version:           2.1.2
  * Requires at least: 4.6
  * Requires PHP:      7.4
  * Author:            David Artiss
@@ -202,14 +202,14 @@ function wd_market_share_data() {
 	// Check if data was returned and, if so, had is expired?
 	if ( ( ! $cache ) || ( is_array( $cache ) && esc_attr( $cache['timeout'] ) < gmdate( 'U' ) ) ) {
 
-		$source = esc_url( 'https://w3techs.com/technologies/details/cm-wordpress/all/all' );
+		$cache['source'] = esc_url( 'https://w3techs.com/technologies/details/cm-wordpress' );
 
 		// Number of days that cache lasts for, as well as days that data can be considered fresh.
 		$cache_days  = 1;
 		$data_expiry = 7;
 
 		// If cache was missing or it's expired, fetch fresh data.
-		$data  = scrape_wd_data( $source );
+		$data  = scrape_wd_data( $cache['source'] );
 		$total = esc_attr( $data['total'] );
 		$cms   = esc_attr( $data['cms'] );
 
@@ -323,7 +323,7 @@ function get_wd_file( $source ) {
 	}
 
 	if ( is_array( $response ) ) {
-		return $response['body'];
+		return wp_strip_all_tags( $response['body'] );
 	} else {
 		return false;
 	}
