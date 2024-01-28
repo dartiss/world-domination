@@ -1,6 +1,6 @@
 # World Domination
 
-<img src="https://ps.w.org/world-domination/assets/icon-128x128.png" align="left">This plugin adds a summary of the current WordPress market coverage to your dashboard!
+<img src="https://ps.w.org/world-domination/assets/icon.svg" width=128px align="left" style="padding: 0 20px 20px 0;">This plugin adds a summary of the current WordPress market coverage to your dashboard!
 
 Basically screen scraping from the [W3Techs](https://w3techs.com/technologies/details/cm-wordpress/all/all "W3Techs") website (don’t panic W3Techs, I’m caching the data - your website performance is safe!), this will display what percentage of websites (in total or that use CRM) are currently powered by WordPress. There are even shortcodes so that you can this information into your posts as well!
 

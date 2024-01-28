@@ -3,9 +3,9 @@ Contributors: dartiss, emrikol, tallulahhh
 Donate link: https://artiss.blog/donate
 Tags: market, coverage, share, w3tech, cms
 Requires at least: 4.6
-Tested up to: 6.3
+Tested up to: 6.4
 Requires PHP: 7.4
-Stable tag: 2.1.2
+Stable tag: 2.1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -64,6 +64,9 @@ One of the parameters to generate the image is a hash - I pass a different one i
 
 I use semantic versioning, with the first release being 1.0.
 
+= 2.1.3 =
+* Enhancement: After updating PHPCS and the sniffs, I've made some further code improvements. Nothing major, don't panic.
+
 = 2.1.2 =
 * Maintenance: Nice try W3Techs. You changed the URL and threw in a change of format to try and fox my plugin. Well, I'm onto you. Consider this my explosive reply! In other words, it stopped working - this fixed it.
 
@@ -109,5 +112,5 @@ I use semantic versioning, with the first release being 1.0.
 
 == Upgrade Notice ==
 
-= 2.1.2 =
-* Fixed the plugin after W3Techs changed the source data format.
+= 2.1.3 =
+* Code quality improvements.

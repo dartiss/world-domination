@@ -9,7 +9,7 @@
  * Plugin Name:       World Domination
  * Plugin URI:        https://wordpress.org/plugins/world-domination/
  * Description:       🌎 Add WordPress market coverage summary to your dashboard.
- * Version:           2.1.2
+ * Version:           2.1.3
  * Requires at least: 4.6
  * Requires PHP:      7.4
  * Author:            David Artiss
@@ -82,25 +82,23 @@ add_filter( 'plugin_action_links', 'world_domination_action_links', 10, 2 );
  *
  * Add a field to the general settings screen for switching the image on/off
  */
-function wd_settings_init() {
+function world_domination_settings_init() {
 
-	add_settings_field( 'wd_image_toggle', __( 'Enable World Domination image', 'world-domination' ), 'wd_setting_callback', 'general', 'default', array( 'label_for' => 'wd_image_toggle' ) );
+	add_settings_field( 'wd_image_toggle', __( 'Enable World Domination image', 'world-domination' ), 'world_domination_setting_callback', 'general', 'default', array( 'label_for' => 'wd_image_toggle' ) );
 
 	register_setting( 'general', 'wd_image_toggle' );
-
 }
 
-add_action( 'admin_init', 'wd_settings_init' );
+add_action( 'admin_init', 'world_domination_settings_init' );
 
 /**
  * Show image option switch
  *
  * Output the settings field for toggling the image on the dashboard
  */
-function wd_setting_callback() {
+function world_domination_setting_callback() {
 
-	echo '<label><input name="wd_image_toggle" type="checkbox" value="1" ' . checked( 1, get_option( 'wd_image_toggle', 1 ), false ) . '/>&nbsp;&nbsp;' . esc_attr( __( 'Untick to remove the image from the dashboard', 'world-domination' ) ) . '</label>';
-
+	echo '<label><input name="wd_image_toggle" type="checkbox" value="1" ' . checked( 1, get_option( 'wd_image_toggle', 1 ), false ) . '>&nbsp;&nbsp;' . esc_attr( __( 'Untick to remove the image from the dashboard', 'world-domination' ) ) . '</label>';
 }
 
 /**
@@ -108,20 +106,17 @@ function wd_setting_callback() {
  *
  * Shortcode function to display the total market share percentage
  *
- * @param   string $paras    Shortcode parameters.
- * @param   string $content  Content.
  * @return  string           Percentage output.
  */
-function world_domination_total_shortcode( $paras = '', $content = '' ) {
+function world_domination_total_shortcode() {
 
-	$data = wd_market_share_data();
+	$data = world_domination_market_share_data();
 
 	if ( ! $data ) {
 		return __( 'N/A', 'world-domination' );
 	} else {
 		return esc_attr( $data['total'] ) . '%';
 	}
-
 }
 
 add_shortcode( 'wp_total_market', 'world_domination_total_shortcode' );
@@ -131,20 +126,17 @@ add_shortcode( 'wp_total_market', 'world_domination_total_shortcode' );
  *
  * Shortcode function to display the CMS market share percentage
  *
- * @param  string $paras    Shortcode parameters.
- * @param  string $content  Content.
  * @return string           Percentage output.
  */
-function world_domination_cms_shortcode( $paras = '', $content = '' ) {
+function world_domination_cms_shortcode() {
 
-	$data = wd_market_share_data();
+	$data = world_domination_market_share_data();
 
 	if ( ! $data ) {
 		return __( 'N/A', 'world-domination' );
 	} else {
 		return esc_attr( $data['cms'] ) . '%';
 	}
-
 }
 
 add_shortcode( 'wp_crm_market', 'world_domination_cms_shortcode' ); // Retained for backwards compatibility!
@@ -155,9 +147,9 @@ add_shortcode( 'wp_cms_market', 'world_domination_cms_shortcode' );
  *
  * Grab market share data and then output to dashboard.
  */
-function wd_add_to_dashboard() {
+function world_domination_add_to_dashboard() {
 
-	$data = wd_market_share_data();
+	$data = world_domination_market_share_data();
 
 	$total   = $data['total'];
 	$cms     = $data['cms'];
@@ -174,7 +166,7 @@ function wd_add_to_dashboard() {
 		/* translators: 1: end of link anchor, 2: total percentage of web use, 3: total percentage of CMSs. */
 		echo '><a alt="' . esc_attr( __( 'Link to the source website', 'world-domination' ) ) . '" title="' . esc_attr( __( 'Last checked on ', 'world-domination' ) ) . esc_attr( gmdate( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), $updated ) ) . '" href="' . esc_url( $source ) . '">' . sprintf( esc_html( __( 'WordPress is currently used%1$s by %2$s of all websites and represents %3$s of all CMS usage.', 'world-domination' ) ), '</a>', esc_attr( $total ) . '%', esc_attr( $cms ) . '%' ) . '</p>';
 
-		if ( 1 == get_option( 'wd_image_toggle', 1 ) ) {
+		if ( 1 === get_option( 'wd_image_toggle', 1 ) ) {
 			// Create a class for converting the percent to words. Use the blog's current language setting for which to use.
 			$format = new NumberFormatter( get_bloginfo( 'language' ), NumberFormatter::SPELLOUT );
 			/* translators: s: percentage of market */
@@ -185,14 +177,14 @@ function wd_add_to_dashboard() {
 	return true;
 }
 
-add_filter( 'activity_box_end', 'wd_add_to_dashboard', 10, 1 );
+add_filter( 'activity_box_end', 'world_domination_add_to_dashboard', 10, 1 );
 
 /**
  * Grab market share data
  *
  * Screen scrape W3Techs site to get the current usage of WordPress.
  */
-function wd_market_share_data() {
+function world_domination_market_share_data() {
 
 	$source = '';
 
@@ -209,7 +201,7 @@ function wd_market_share_data() {
 		$data_expiry = 7;
 
 		// If cache was missing or it's expired, fetch fresh data.
-		$data  = scrape_wd_data( $cache['source'] );
+		$data  = world_domination_scrape_data( $cache['source'] );
 		$total = esc_attr( $data['total'] );
 		$cms   = esc_attr( $data['cms'] );
 
@@ -253,12 +245,12 @@ function wd_market_share_data() {
  * @param  string $source  URL to extract data.
  * @return string          The percent of market share or FALSE, if all went wrong.
  */
-function scrape_wd_data( $source ) {
+function world_domination_scrape_data( $source ) {
 
 	$data = array();
 
 	// Fetch the website data.
-	$text = get_wd_file( $source );
+	$text = world_domination_get_file( $source );
 
 	// If data was found, attempt to extract out the market data that we need.
 	$total = false;
@@ -303,7 +295,6 @@ function scrape_wd_data( $source ) {
 	$data['total'] = $total;
 	$data['cms']   = $cms;
 	return $data;
-
 }
 
 /**
@@ -314,10 +305,10 @@ function scrape_wd_data( $source ) {
  * @param  string $source  URL to extract data.
  * @return string          Returned data.
  */
-function get_wd_file( $source ) {
+function world_domination_get_file( $source ) {
 
 	if ( function_exists( 'vip_safe_wp_remote_get' ) ) {
-		$response = vip_safe_wp_remote_get( $source, '', 3, 3 ); 
+		$response = vip_safe_wp_remote_get( $source, '', 3, 3 );
 	} else {
 		$response = wp_remote_get( $source, array( 'timeout' => 3 ) ); // @codingStandardsIgnoreLine -- for non-VIP environments
 	}
