@@ -3,17 +3,17 @@ Contributors: dartiss, emrikol, tallulahhh
 Donate link: https://artiss.blog/donate
 Tags: market, coverage, share, w3tech, cms
 Requires at least: 4.6
-Tested up to: 6.4
+Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 2.1.3
+Stable tag: 2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-🌎 Add WordPress market coverage summary to your dashboard.
+Add WordPress market coverage summary to your dashboard.
 
 == Description ==
 
-🌎 Adds a summary of the current WordPress market coverage to your dashboard!
+Adds a summary of the current WordPress market coverage to your dashboard!
 
 Basically screen scraping from the [W3Techs](https://w3techs.com/technologies/details/cm-wordpress/all/all "W3Techs") website (don’t panic W3Techs, I’m caching the data - your website performance is safe!), this will display what percentage of websites (in total or that use CMS) are currently powered by WordPress. There are even shortcodes so that you can this information into your posts as well!
 
@@ -23,9 +23,9 @@ https://www.youtube.com/watch?v=gY2k8_sSTsE
 
 World Domination is a community plugin that follows both WordPress and WordPress VIP coding standards.
 
-Iconography is courtesy of the very talented [Janki Rathod](https://www.fiverr.com/jankirathore) ♥️
+Iconography is courtesy of the very talented [Janki Rathod](https://www.fiverr.com/jankirathore) .
 
-👉 Please visit the [Github page](https://github.com/dartiss/world-domination "Github") for the latest code development, planned enhancements and known issues 👈
+**Please visit the [Github page](https://github.com/dartiss/world-domination "Github") for the latest code development, planned enhancements and known issues**
 
 == Using the shortcodes =
 
@@ -63,6 +63,12 @@ One of the parameters to generate the image is a hash - I pass a different one i
 == Changelog ==
 
 I use semantic versioning, with the first release being 1.0.
+
+= 2.2 =
+* Maintenance: A big jump in version numbers, but little to see. A lot of the code has changed, though, hence the release number. Basically, all the code was in one file and it was getting big and cumbersome, so it's been split.
+* Enhancement: I took the opportunity to replace some of the code with some that I'm using across all my plugins - a shared resource, which will be kept in-step
+* Bug: Fixed a bug that would prevent the dashboard image from displaying
+* Bug: Also fixed some a bit more minor, but could throw up the occasional PHP error
 
 = 2.1.3 =
 * Enhancement: After updating PHPCS and the sniffs, I've made some further code improvements. Nothing major, don't panic.
@@ -112,5 +118,5 @@ I use semantic versioning, with the first release being 1.0.
 
 == Upgrade Notice ==
 
-= 2.1.3 =
-* Code quality improvements.
+= 2.2 =
+* Fixed an image display bug whilst also massively overhauling the code layout
