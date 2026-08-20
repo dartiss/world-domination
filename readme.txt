@@ -3,7 +3,7 @@ Contributors: dartiss, emrikol, tallulahhh
 Donate link: https://artiss.blog/donate
 Tags: market, coverage, share, w3tech, cms
 Requires at least: 4.6
-Tested up to: 6.5
+Tested up to: 7.1
 Requires PHP: 7.4
 Stable tag: 2.2
 License: GPLv2 or later
@@ -23,13 +23,24 @@ https://www.youtube.com/watch?v=gY2k8_sSTsE
 
 World Domination is a community plugin that follows both WordPress and WordPress VIP coding standards.
 
-Iconography is courtesy of the very talented [Janki Rathod](https://www.fiverr.com/jankirathore) .
+Iconography is courtesy of the very talented [Janki Rathod](https://www.fiverr.com/jankirathore).
 
 **Please visit the [Github page](https://github.com/dartiss/world-domination "Github") for the latest code development, planned enhancements and known issues**
 
 == Using the shortcodes =
 
-There are two shortcodes `[wp_total_market]` and `[wp_cms_market]`. Simply add these, wherever you wish within a post or page, to display the latest total or CMS market share data. 
+There are two shortcodes `[wp_total_market]` and `[wp_cms_market]`. Simply add these, wherever you wish within a post or page, to display the latest total or CMS market share data.
+
+In both cases, the shortcode will be replaced by the relevant marketshare figure (WordPress as a proportion of all websites and of all CMS usage). Both will be shown in the format of xx.x%, with xx.x being the relevant percentage.
+
+== Toggling the dashboard image ==
+
+You can toggle the dashboard image on and off by
+
+1. Head to Settings -> General
+2. Scroll down to the option named "Enable World Domination image"
+3. Tick or untick the box next to it
+4. Press the "Save Changes" button to update.
 
 == Installation ==
 
@@ -53,6 +64,18 @@ Yes you can! Head to Settings -> General in WP Admin and find the tickbox for th
 = The dashboard graphic keeps changing color! =
 
 One of the parameters to generate the image is a hash - I pass a different one into it based on the current date, so will change daily.
+
+= Do you support this plugin on forks of WordPress? =
+
+No. It was developed for WordPress and so forks remain unsupported. I have no intention of developing and testing this on any other version.
+
+= How do you uninstall the plugin and what does it do? =
+
+When you uninstall the plugin via the Plugins menu in WP Admin, all saved settings will be deleted along with the plugin files, leaving no residual data behind.
+
+= How can I contribute, report issues, or request features? =
+
+You can [use the plugin forum on WordPress.org](https://wordpress.org/support/plugin/world-domination/) for support queries. To contribute to the code, suggest enhancements or report bugs you can [do so on my Github repo](https://github.com/dartiss/world-domination).
 
 == Screenshots ==
 
